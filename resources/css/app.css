@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: Verdana, system-ui, sans-serif;
+    }
+
+    section {
+        @apply bg-yellow-800/70 flex flex-wrap justify-center gap-y-10 py-5 px-8 m-5
+        border-solid border-yellow-600/50 border-2 rounded text-white
+        md:px-10 md:mx-10 md:py-12 md:mx-20 lg:mx-40;
+    }
+
+    h1 {
+        @apply text-2xl font-semibold mb-4;
+        font-family: Helvetica, system-ui, sans-serif;
+    }
+
+    h2 {
+        @apply text-xl font-medium mb-2;
+    }
+
+    p {
+        @apply my-4;
+    }
+}
