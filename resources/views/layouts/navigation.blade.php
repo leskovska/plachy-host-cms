@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('admin-videos')" :active="request()->routeIs('admin-videos')">
                         Videa
                     </x-nav-link>
+                    <x-nav-link :href="route('admin-concerts')" :active="request()->routeIs('admin-concerts')">
+                        Koncerty
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -75,6 +78,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin-videos')" :active="request()->routeIs('admin-videos')">
                 Videa
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin-concerts')" :active="request()->routeIs('admin-concerts')">
+                Koncerty
             </x-responsive-nav-link>
         </div>
 

@@ -33,6 +33,19 @@ Route::prefix('admin')
 
         Route::get('/videos', VideoIndex::class
         )->name('admin-videos');
+
+        Route::prefix('concert')
+            ->group(function () {
+                Route::get('/', \App\Http\Livewire\Concert\Index::class
+                )->name('admin-concerts');
+
+                Route::get('/new', \App\Http\Livewire\Concert\Edit::class
+                )->name('admin-concert-new');
+
+                Route::get('/edit/{concert}', \App\Http\Livewire\Concert\Edit::class
+                )->name('admin-concert-edit');
+
+            });
     })
     ->middleware(['auth', 'verified']);
 
