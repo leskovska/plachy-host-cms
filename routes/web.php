@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Concert\Edit as ConcertEdit;
+use App\Http\Livewire\Concert\Index as ConcertIndex;
 use App\Http\Livewire\Video\Edit as VideoEdit;
 use App\Http\Livewire\Video\Index as VideoIndex;
 use Illuminate\Support\Facades\Route;
@@ -25,26 +27,18 @@ Route::prefix('admin')
             return view('dashboard');}
         )->name('admin-dashboard');
 
-        Route::get('/video/new', VideoEdit::class
-        )->name('admin-video-new');
-
-        Route::get('/video/edit/{video}', VideoEdit::class
-        )->name('admin-video-edit');
-
-        Route::get('/videos', VideoIndex::class
-        )->name('admin-videos');
+        Route::prefix('video')
+            ->group(function () {
+                Route::get('/', VideoIndex::class)->name('admin-videos');
+                Route::get('/new', VideoEdit::class)->name('admin-video-new');
+                Route::get('/edit/{video}', VideoEdit::class)->name('admin-video-edit');
+            });
 
         Route::prefix('concert')
             ->group(function () {
-                Route::get('/', \App\Http\Livewire\Concert\Index::class
-                )->name('admin-concerts');
-
-                Route::get('/new', \App\Http\Livewire\Concert\Edit::class
-                )->name('admin-concert-new');
-
-                Route::get('/edit/{concert}', \App\Http\Livewire\Concert\Edit::class
-                )->name('admin-concert-edit');
-
+                Route::get('/', ConcertIndex::class)->name('admin-concerts');
+                Route::get('/new', ConcertEdit::class)->name('admin-concert-new');
+                Route::get('/edit/{concert}', ConcertEdit::class)->name('admin-concert-edit');
             });
     })
     ->middleware(['auth', 'verified']);
