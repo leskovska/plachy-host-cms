@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    AddDefaultCharset utf-8
+    AddCharset utf-8 .html .php
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

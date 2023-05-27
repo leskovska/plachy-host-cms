@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Concert\Edit as ConcertEdit;
 use App\Http\Livewire\Concert\Index as ConcertIndex;
+use App\Http\Livewire\Introduction\Index as IntroductionIndex;
 use App\Http\Livewire\Video\Edit as VideoEdit;
 use App\Http\Livewire\Video\Index as VideoIndex;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,11 @@ Route::middleware('auth')
         Route::get('/dashboard', function () {
             return view('dashboard');}
         )->name('admin-dashboard');
+
+        Route::prefix('introduction')
+            ->group(function () {
+                Route::get('/', IntroductionIndex::class)->name('admin-introduction');
+            });
 
         Route::prefix('video')
             ->group(function () {
