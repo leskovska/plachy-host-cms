@@ -44,7 +44,7 @@ class ConcertTest extends TestCase
     {
         foreach ($this->routeNamesWithoutParameters as $routeName) {
             $this->get(route($routeName))
-                ->assertStatus(500);
+                ->assertRedirect('login');
         }
     }
 

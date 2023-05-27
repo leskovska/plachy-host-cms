@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'App\Http\Controllers\Index@index');
 
-Route::prefix('admin')
-    ->group(function () {
+Route::middleware('auth')
+    ->prefix('admin')->group(function () {
 
         Route::get('/dashboard', function () {
             return view('dashboard');}
@@ -40,8 +40,7 @@ Route::prefix('admin')
                 Route::get('/new', ConcertEdit::class)->name('admin-concert-new');
                 Route::get('/edit/{concert}', ConcertEdit::class)->name('admin-concert-edit');
             });
-    })
-    ->middleware(['auth', 'verified']);
+    });
 
 Route::middleware('auth')
     ->group(function () {
