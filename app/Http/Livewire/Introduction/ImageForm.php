@@ -3,41 +3,40 @@
 namespace App\Http\Livewire\Introduction;
 
 use App\Models\Introduction;
-use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Livewire\Component;
 
-class Index extends Component implements HasForms
+class ImageForm extends Component implements HasForms
 {
     use InteractsWithForms;
-
     public Introduction|null $introduction = null;
-    public string $text;
 
     public function mount()
     {
         $this->introduction = Introduction::latest()->first();
+
         if (isset($this->introduction)) {
             $this->form->fill([
-                'text' => $this->introduction->text,
+                'document' => optional($this->introduction->getFirstMediaUrl('introductions'))->getUrl(),
             ]);
         }
     }
 
     public function render()
     {
-        return view('livewire.introduction.index', [
-            'page_title' => 'Úvod',
-        ]);
+        return view('livewire.introduction.image-form');
     }
-
     protected function getFormSchema()
     {
         return [
-            RichEditor::make('text')
-                ->required(),
+            SpatieMediaLibraryFileUpload::make('document')
+                ->label('Úvodní brázek')
+                ->acceptedFileTypes(['image/*'])
+                ->responsiveImages()
+                ->collection('introduction'),
         ];
     }
 
@@ -48,11 +47,7 @@ class Index extends Component implements HasForms
 
     public function submit(): void
     {
-        $data = $this->form->getState();
-        $data['author_id'] = auth()->user()->id;
-
-        Introduction::create($data);
-        $this->introduction?->delete();
+        $this->form->model($this->introduction)->saveRelationships();
 
         Notification::make()
             ->title('Změny byly uloženy.')

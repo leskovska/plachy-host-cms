@@ -10,18 +10,19 @@ module.exports = {
         './storage/framework/views/*.php',
     ],
     theme: {
-        backgroundImage: {
-            'main': "url('../../public/images/background.jpg')",
-        },
         extend: {
             colors: {
                 danger: colors.rose,
                 primary: colors.blue,
                 success: colors.green,
                 warning: colors.yellow,
+                logo: '#2871c1',
+                section_blue: '#163E69',
+                section_brown: '#694A16'
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                raleway: ['Raleway', ...defaultTheme.fontFamily.sans],
             },
         },
     },

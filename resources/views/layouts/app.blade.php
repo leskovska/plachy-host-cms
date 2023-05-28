@@ -34,7 +34,9 @@
                 {{ $slot }}
             </main>
         </div>
+
         @livewire('notifications')
         @stack('scripts')
+        <livewire:modal />
     </body>
 </html>

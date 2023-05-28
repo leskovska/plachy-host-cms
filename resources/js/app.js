@@ -1,14 +1,18 @@
-import Alpine from 'alpinejs'
+import Alpine from 'alpinejs';
+import Livewire from 'livewire';
 
-import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm'
-Alpine.plugin(NotificationsAlpinePlugin)
-
+import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm';
 import FormsAlpinePlugin from "../../vendor/filament/forms/dist/module.esm";
-Alpine.plugin(FormsAlpinePlugin)
-
 import Focus from "@alpinejs/focus";
-Alpine.plugin(Focus)
 
-window.Alpine = Alpine
+// Register Alpine.js plugins
+Alpine.plugin(NotificationsAlpinePlugin);
+Alpine.plugin(FormsAlpinePlugin);
+Alpine.plugin(Focus);
 
-Alpine.start()
+// Initialize Alpine.js
+window.Alpine = Alpine;
+Alpine.start();
+
+// Initialize Livewire
+window.Livewire = Livewire;

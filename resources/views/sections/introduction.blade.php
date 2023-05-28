@@ -1,9 +1,10 @@
-@if($introduction_text)
-<section id="main" class="bg-yellow-800/70 flex flex-wrap justify-center gap-y-10 py-5 px-8 m-5
-        border-solid border-yellow-600/50 border-2 rounded text-white
-        md:px-10 md:mx-10 md:py-12 md:mx-20 lg:mx-40">
-    <div class="text-white">
-        {!! $introduction_text !!}
+@if($introduction->text)
+<section id="main"
+         :class="{ 'hidden' : active_tab != 'main' }"
+         class="bg-section_brown flex flex-wrap justify-center py-5 px-8 text-white
+        md:px-10 md:py-12">
+    <div class="text-white max-w-2xl">
+        {!! $introduction->text !!}
     </div>
 </section>
 @endif

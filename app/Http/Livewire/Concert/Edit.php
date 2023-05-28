@@ -56,8 +56,7 @@ class Edit extends Component implements HasForms
                 ->nullable()
                 ->acceptedFileTypes(['image/*'])
                 ->responsiveImages()
-                ->directory('form-attachments')
-                ->collection('concerts'),
+                ->collection('concert'),
         ];
     }
 

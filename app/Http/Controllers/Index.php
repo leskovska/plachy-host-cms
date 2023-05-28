@@ -11,11 +11,11 @@ class Index extends Controller
 {
     public function index()
     {
-        $introductionText = Introduction::latest()->first() ? Introduction::latest()->first()->value('text') : '';
+        $introduction = Introduction::latest()->first();
         $concerts = Concert::all();
         $videos = Video::all();
         return view('index', [
-            'introduction_text' => $introductionText,
+            'introduction' => $introduction,
             'concerts' => $concerts,
             'videos' => $videos,
         ]);

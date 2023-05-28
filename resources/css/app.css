@@ -1,4 +1,21 @@
 @import '../../vendor/filament/forms/dist/module.esm.css';
+@import url('https://fonts.googleapis.com/css2?family=Raleway');
 @tailwind base;
+
+@layer base {
+    html {
+        @apply font-raleway
+    }
+    h1 {
+        @apply text-2xl;
+    }
+    h2 {
+        @apply font-bold text-xl leading-tight pb-4;
+    }
+    h3 {
+        @apply font-bold text-lg leading-tight pb-4;
+    }
+}
+
 @tailwind components;
 @tailwind utilities;
