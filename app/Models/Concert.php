@@ -19,19 +19,4 @@ class Concert extends Model implements HasMedia
         'title',
         'date',
     ];
-
-    public function registerMediaConversions(Media $media = null): void
-    {
-        $this->addMediaConversion('thumb')
-            ->width(300)
-            ->height(300)
-            ->format('jpg')
-            ->nonQueued();
-
-        $this->addMediaConversion('medium')
-            ->width(800)
-            ->height(800)
-            ->format('jpg')
-            ->nonQueued();
-    }
 }
