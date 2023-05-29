@@ -6,14 +6,10 @@
         <meta name="application-name" content="{{ config('app.name') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <title>{{ config('app.name') }}</title>
-
         <style>[x-cloak] { display: none !important; }</style>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
-        @livewireScripts
-
+        @vite('resources/css/app.css')
     </head>
     <body class="font-sans antialiased">
 
@@ -36,7 +32,14 @@
         </div>
 
         @livewire('notifications')
-        @stack('scripts')
         <livewire:modal />
+
+        <!-- Livewire Scripts -->
+        @livewireScripts
+        <!-- Filament Forms Script -->
+{{--        @vite('vendor/filament/forms/dist/module.esm.js')--}}
+        <!-- Other Scripts -->
+        @vite('resources/js/app.js')
+        @stack('scripts')
     </body>
 </html>

@@ -1,4 +1,4 @@
-@if($introduction->text)
+@if($introduction)
 <section id="main"
          :class="{ 'hidden' : active_tab != 'main' }"
          class="bg-section_brown flex flex-wrap justify-center py-5 px-8 text-white

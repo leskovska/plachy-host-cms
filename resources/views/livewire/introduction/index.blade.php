@@ -8,7 +8,7 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <h3>Úvodní obrázek</h3>
-                    @if($introduction->getFirstMedia('introduction'))
+                    @if($introduction)
                         <div>
                             {{ $introduction->getFirstMedia('introduction') }}
                         </div>

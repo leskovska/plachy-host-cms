@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Plachý host</title>
         @vite('resources/css/app.css')
-        @vite('resources/js/app.js')
+        @livewireStyles
     </head>
     <body x-data="{ active_tab: 'main'}" class="antialiased max-w-7xl m-auto bg-black">
         @include('sections.header')
@@ -14,5 +14,7 @@
         @include('sections.videos')
         @include('sections.footer')
         @livewireScripts
+        @stack('scripts')
+        @vite('resources/js/app.js')
     </body>
 </html>

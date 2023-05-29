@@ -1,13 +1,19 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
 const colors = require('tailwindcss/colors')
 
 module.exports = {
     content: [
+        "./app/**/*.php",
         './resources/**/*.blade.php',
-        './vendor/filament/**/*.blade.php',
-        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        "./resources/**/*.html",
+        "./resources/**/*.js",
+        "./resources/**/*.php",
         './storage/framework/views/*.php',
+        "./vendor/filament/*.blade.php",
+        './vendor/filament/**/*.blade.php',
+        "./vendor/filament/**/*.blade.php",
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        "./vendor/suleymanozev/**/*.blade.php",
     ],
     theme: {
         extend: {
@@ -27,5 +33,8 @@ module.exports = {
         },
     },
 
-    plugins: [forms],
+    plugins: [
+        require("@tailwindcss/forms"),
+        require("@tailwindcss/typography"),
+    ],
 };

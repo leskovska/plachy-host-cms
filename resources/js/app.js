@@ -1,5 +1,4 @@
 import Alpine from 'alpinejs';
-import Livewire from 'livewire';
 
 import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/module.esm';
 import FormsAlpinePlugin from "../../vendor/filament/forms/dist/module.esm";
@@ -13,6 +12,3 @@ Alpine.plugin(Focus);
 // Initialize Alpine.js
 window.Alpine = Alpine;
 Alpine.start();
-
-// Initialize Livewire
-window.Livewire = Livewire;

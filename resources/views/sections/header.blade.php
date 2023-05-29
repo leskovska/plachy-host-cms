@@ -23,5 +23,7 @@
             <span class="text-white tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl">Plachý host</span>
         </div>
     </div>
-    {{ $introduction->getFirstMedia('introduction') }}
+    @if($introduction)
+        {{ $introduction->getFirstMedia('introduction') }}
+    @endif
 </div>
