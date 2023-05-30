@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:22.04
+FROM ubuntu:22.04
 
 LABEL maintainer="Taylor Otwell"
 
@@ -14,7 +14,7 @@ ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
-    && apt-get install -y wget gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 dnsutils \
+    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 dnsutils librsvg2-bin \
     && curl -sS 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x14aa40ec0831756756d7f66c4f4ea0aae5267a6c' | gpg --dearmor | tee /etc/apt/keyrings/ppa_ondrej_php.gpg > /dev/null \
     && echo "deb [signed-by=/etc/apt/keyrings/ppa_ondrej_php.gpg] https://ppa.launchpadcontent.net/ondrej/php/ubuntu jammy main" > /etc/apt/sources.list.d/ppa_ondrej_php.list \
     && apt-get update \
@@ -42,42 +42,6 @@ RUN apt-get update \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-# Install SQLSRV
-
-RUN apt-get update \
-    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list > /etc/apt/sources.list.d/mssql-release.list \
-    && apt-get update \
-    && ACCEPT_EULA=Y apt-get install -y msodbcsql17 \
-    && ACCEPT_EULA=Y apt-get install -y mssql-tools unixodbc-dev
-
-RUN pecl install sqlsrv
-RUN pecl install pdo_sqlsrv
-
-RUN printf "; priority=20\nextension=sqlsrv.so\n" > /etc/php/8.2/mods-available/sqlsrv.ini
-RUN printf "; priority=30\nextension=pdo_sqlsrv.so\n" > /etc/php/8.2/mods-available/pdo_sqlsrv.ini
-
-RUN phpenmod -v 8.2 sqlsrv pdo_sqlsrv
-
-# Download Oracle
-RUN mkdir -p /opt/oracle \
-    && cd /opt/oracle \
-    && wget https://download.oracle.com/otn_software/linux/instantclient/215000/instantclient-basic-linux.x64-21.5.0.0.0dbru.zip \
-    && wget https://download.oracle.com/otn_software/linux/instantclient/215000/instantclient-sdk-linux.x64-21.5.0.0.0dbru.zip \
-    && unzip instantclient-basic-linux.x64-21.5.0.0.0dbru.zip \
-    && unzip instantclient-sdk-linux.x64-21.5.0.0.0dbru.zip \
-    && echo /opt/oracle/instantclient_21_5 > /etc/ld.so.conf.d/oracle-instantclient.conf \
-    && ldconfig
-
-# Configure Oracle
-RUN apt-get update \
-    && apt-get install -y php-dev php-pear build-essential libaio1 \
-    && pecl channel-update pecl.php.net \
-    && echo "instantclient,/opt/oracle/instantclient_21_5" | pecl install oci8 \
-    && echo "extension=oci8.so" >> /etc/php/8.2/mods-available/oci8.ini
-
-RUN phpenmod -v 8.2 oci8
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
 
